@@ -1,0 +1,24 @@
+const { ContractFactory, Wallet, providers } = require("@starknet/core");
+
+async function sendTransaction() {
+  // Замените на фактические данные
+  const privateKey = "0x0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+  const contractAddress = "0x0123456789abcdef0123456789abcdef01234567";
+  const abi = [...]; // Замените на ABI вашего контракта
+  const functionName = "yourFunction";
+  const functionArgs = [...]; // Замените на аргументы вашей функции
+
+  // Подключение к Starknet сети
+  const provider = new providers.JsonRpcProvider("https://starknet-rpc.mainnet.starkware.co");
+  const wallet = new Wallet(privateKey, provider);
+
+  // Создание экземпляра контракта
+  const contractFactory = new ContractFactory(abi, wallet);
+  const contract = contractFactory.attach(contractAddress);
+
+  // Отправка транзакции
+  const transaction = await contract[functionName](...functionArgs);
+  console.log("Transaction sent. Transaction hash:", transaction.hash);
+}
+
+sendTransaction();
